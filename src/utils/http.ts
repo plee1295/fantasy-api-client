@@ -5,17 +5,21 @@ export default class Http {
 
   constructor (baseUrl: string) {
     this.baseUrl = baseUrl;
-
-    axios.defaults.baseURL = baseUrl;
   }
 
   async get (path: string): Promise<object> {
     let response = {}
 
     try {
-      response = await axios.get(path);
-    } catch (error) {
-      response = { error };
+      const { data } = await axios.get(`${this.baseUrl}${path}`);
+      response = data
+    } catch (error: any) {
+      response = {
+        error: {
+          status: error.response.status,
+          statusText: error.response.statusText
+        }
+      };
     }
 
     return response;

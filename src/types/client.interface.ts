@@ -1,7 +1,7 @@
 export default interface IClient {
-  leagueId: number;
+  leagueId: string;
   options: object;
 
-  getLeague(id: number): object;
-  getLeagueMembers(id: number): object[];
+  getLeague(id: string): object;
+  getLeagueMembers(id: string): object[];
 }
